@@ -24,8 +24,6 @@ install.packages("multcomp")
 install.packages("nlme")
 install.packages("broom")
 install.packages("ggmosaic")
-install.packages("epitools")
-
 install.packages("tidyverse")
 
 # Before using an installed package, you must load it using library().
@@ -38,7 +36,6 @@ library("tidyverse")
 #   tibble dplyr tidyr stringr readr forcats
 
 # Check for updates
-tidyverse_update()
 
 # Create an object called x
 x <- 3*4
@@ -52,4 +49,3 @@ data <- read_csv("datasets/r4all/competition.csv", col_names = TRUE)
 
 # Swirl lesson
 install.packages("swirl")
-library(swirl)
