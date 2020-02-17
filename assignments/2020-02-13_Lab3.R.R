@@ -63,13 +63,25 @@ ggplot(data = lovett_tidy) +
   stat_summary(aes(x = type, y = measurement), fun.y=mean, colour="darkred", geom="point", 
                shape=18, size=3)
 
+sanchez <- read_csv("datasets/demos/sanchez.csv")
 
+sanchez %>%
+  descr()
 
+sanchez <- mutate(sanchez, log1beetle = log(BEETLE96 +1))
 
+ggplot(sanchez) +
+  geom_histogram(aes(BEETLE96), binwidth = 50)+
+  facet_wrap(~COLTYPE)
+  
+ggplot(sanchez) +
+  geom_histogram(aes(log1beetle),binwidth = .5) 
 
+ggplot(sanchez) +
+  geom_boxplot(aes(x = COLTYPE, y = BEETLE96), notch = FALSE, varwidth = TRUE)
 
-
-
+ggplot(sanchez) +
+  geom_boxplot(aes(x = COLTYPE, y = log1beetle), notch = FALSE, varwidth = TRUE)
 
 
 # STANDARD ERROR ISN't FOR LOVETT! #
