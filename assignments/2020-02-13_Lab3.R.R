@@ -66,7 +66,14 @@ ggplot(data = lovett_tidy) +
 sanchez <- read_csv("datasets/demos/sanchez.csv")
 
 sanchez %>%
+  group_by(COLTYPE) %>%
   descr()
+
+SE_BEETLE96 <- sanchez %>%
+  summarise(SE_Beetle96 = (sd(BEETLE96)/sqrt(n())))
+
+SE_log1beetle <- sanchez %>%
+  summarise(SE_log1beetle = (sd(log1beetle)/sqrt(n())))
 
 sanchez <- mutate(sanchez, log1beetle = log(BEETLE96 +1))
 
@@ -75,19 +82,12 @@ ggplot(sanchez) +
   facet_wrap(~COLTYPE)
   
 ggplot(sanchez) +
-  geom_histogram(aes(log1beetle),binwidth = .5) 
+  geom_histogram(aes(log1beetle),binwidth = 1) 
+  facet_wrap(~COLTYPE)
 
 ggplot(sanchez) +
   geom_boxplot(aes(x = COLTYPE, y = BEETLE96), notch = FALSE, varwidth = TRUE)
 
 ggplot(sanchez) +
   geom_boxplot(aes(x = COLTYPE, y = log1beetle), notch = FALSE, varwidth = TRUE)
-
-
-# STANDARD ERROR ISN't FOR LOVETT! #
-SE_S04 <- lovett %>%
-  summarise(SE_SO4 = (sd(SO4)/sqrt(n())))
-
-SE_S04MOD <- lovett %>%
-  summarise(SE_SO4MOD = (sd(SO4MOD)/sqrt(n())))
                   
