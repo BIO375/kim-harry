@@ -65,6 +65,7 @@ ggplot(data = lovett_tidy) +
 
 sanchez <- read_csv("datasets/demos/sanchez.csv")
 
+
 sanchez %>%
   group_by(COLTYPE) %>%
   descr()
@@ -90,4 +91,11 @@ ggplot(sanchez) +
 
 ggplot(sanchez) +
   geom_boxplot(aes(x = COLTYPE, y = log1beetle), notch = FALSE, varwidth = TRUE)
-                  
+
+### Harry, I think you overwrote the sanchez.csv file found in demos
+# with a file without any data in it? 
+# In order to calculate the SE for log1beetle, you first must add the
+# log1beetle column to your dataset.  Switch order of line 76 and 79.
+# Missing a + sign at the end of line 86
+
+### GRADE: code breaks 3 times, 7/10
