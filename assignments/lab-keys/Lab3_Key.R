@@ -1,4 +1,4 @@
-### Lab 3. Data manipulation and graphing
+x### Lab 3. Data manipulation and graphing
 
 # Clean up the working environment
 rm(list = ls())
