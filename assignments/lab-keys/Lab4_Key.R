@@ -81,6 +81,7 @@ ggplot(data = mpg) +
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy, color = cty, size = cty))
 
+
 # 5.  Stroke is thickness of the line outlining a shape.  As the vignette ggplot2-specs states, "Note that 
 #     shapes 21-24 have both stroke colour and a fill. The size of the filled part is controlled by size, 
 #     the size of the stroke is controlled by stroke. Each is measured in mm, and the total size of the 
