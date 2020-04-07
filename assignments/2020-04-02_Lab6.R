@@ -104,13 +104,26 @@ t.test(beaks$preference,
 
 ### Review Problem 2-16####
 
+# Confidence Interval#
+
 aggression <- read_csv("datasets/abd/review2/rev2q16ZebrafishAggression.csv") 
 
 summ_aggression <- aggression %>%
   group_by(genotype) %>% 
   summarise(mean_aggression = mean(timeInAggression),
             sd_aggression = sd(timeInAggression),
-            n_aggression = n())
+            n_aggression = n(),
+            se = sd(timeInAggression)/sqrt(n()))
+  
+
+alpha <- 0.05
+mean <- summ_aggression$mean_aggression
+se <- summ_aggression$se
+df <- summ_aggression$n_aggression -1
+
+mean + c(-1,1)*qt(1-alpha, df )*se
+
+# Statistical Test
 
 ratio <-(max(summ_aggression$sd_aggression))/(min(summ_aggression$sd_aggression))
 
@@ -121,7 +134,7 @@ ggplot(aggression) +
 ggplot(aggression) +
   geom_boxplot(aes(x = genotype, y = timeInAggression))+
   stat_summary(aes(x = genotype, y = timeInAggression), 
-               fun.y=mean, 
+               fun.y="mean", 
                colour="blue", 
                fill = "blue",
                geom="point", 
@@ -136,4 +149,4 @@ ggplot(aggression)+
 t.test(timeInAggression ~ genotype, data = aggression, var.equal = TRUE, alternative = "two.sided", conf.level = 0.95)
 
 # We found that the time spent in aggressive activity was significantly higher in spd mutant zebrafish compared to 
-# wildtype zebrafish (t = 3.3802, df = 19, p-value = 0.003142).
+# wildtype zebrafish (two-sample t-test: t = 3.3802, df = 19, p-value = 0.003142).
