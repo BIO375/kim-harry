@@ -136,4 +136,4 @@ ggplot(aggression)+
 t.test(timeInAggression ~ genotype, data = aggression, var.equal = TRUE, alternative = "two.sided", conf.level = 0.95)
 
 # We found that the time spent in aggressive activity was significantly higher in spd mutant zebrafish compared to 
-# wildtype zebrafish (t = 3.3802, df = 19, p-value = 0.003142) 
+# wildtype zebrafish (t = 3.3802, df = 19, p-value = 0.003142).
