@@ -76,3 +76,4 @@ ggplot(algae)+
 t.test(growthrate ~ treatment, data = algae, var.equal = TRUE, alternative = "two.sided", conf.level = 0.95)
 
 
+### Code broke line 60, missing a number for binwidth 9/10 ####
