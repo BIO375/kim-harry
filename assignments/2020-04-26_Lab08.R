@@ -6,9 +6,11 @@ getwd()
 library("ggfortify")
 library("multcomp")
 library("nlme")
-library("tidyverse")
-
-tidyverse_update()
+library(ggplot2)
+library(dplyr)
+library(readr)
+library(tidyr)
+library(forcats)
 
 crab <- read_csv("datasets/abd/chapter15/chap15q30FiddlerCrabFans.csv", col_types = cols(
   crabType = col_factor () ))
@@ -20,7 +22,7 @@ crab <- crab %>%
   mutate(crabType = fct_recode(crabType, intact = "intact male",
                                minorRemoved = "male minor removed",
                                majorRemoved = "male major removed"
-  ))
+))
 
 head(crab)
 
@@ -38,6 +40,9 @@ ggplot(crab) +
 ggplot(crab)+
   geom_qq(aes(sample = bodyTemperature, color = crabType))
 
+# histograms show skewed data, especially minorRemoved and intact. Boxplots show outliers in three groups. 
+# QQ-plots not really straight lines. 
+
 model01 <- lm(bodyTemperature~crabType, data = crab)
 
 summ_bodyTemperature <- crab %>%
@@ -48,6 +53,14 @@ summ_bodyTemperature <- crab %>%
 
 ratio <-(max(summ_bodyTemperature$sd_bodyTemperature))/(min(summ_bodyTemperature$sd_bodyTemperature))
 
-autoplot(crab)
+autoplot(model01)
 
+anova(model01)
 
+summary(model01)
+
+# Normality assumption not met so Kruskal-Wallis test will be used. 
+
+kruskal.test(bodyTemperature ~ crabType, data = crab)
+
+### There is a significance in mean heat gain among groups (chi-squared = 37.136; df = 3; p-value = 4.306e-08)
