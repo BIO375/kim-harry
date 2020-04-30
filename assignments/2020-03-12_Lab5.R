@@ -183,7 +183,9 @@ ratio <-(max(summ_spiders$sd_spiders))/(min(summ_spiders$sd_spiders))
 t.test(untidy_spiders$HORIZDIM, untidy_spiders$HORIZLIG, 
        alternative = "two.sided", paired = TRUE, conf.level = 0.95)
 
-
+### 9/10 ####
+# Breaks at line 20, obliquity.csv is not saved in the location specified, 
+# Error: 'datasets/demos/obliquity.csv' does not exist in current working directory
 
 
 
